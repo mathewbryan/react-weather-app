@@ -3,24 +3,23 @@ import apiKey from './apiKeys'
 import DayCard from './dayCard'
 import DegreeToggle from './DegreeToggle'
 
-let weatherURL =
-`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${apiKey.openWeatherKey }`
-
 class WeekContainer extends React.Component {
     state = {
         fullData: [],
         dailyData: [],
         degreeType: "celsius",
+        location: "london",
     }
+
     
-    updateForecastDegree = (event) => {
+    updateDegree = (event) => {
       this.setState({
         degreeType: event.target.value
         }, () => console.log(this.state.degreeType))
       }
     
-    componentDidMount = () => {
-       
+    componentDidMount = () => { 
+      let weatherURL = `http://api.openweathermap.org/data/2.5/forecast?q=${this.state.location}&units=imperial&APPID=${apiKey.openWeatherKey }`
         fetch(weatherURL)
         .then(res => res.json())
         .then(data => {
@@ -39,12 +38,11 @@ class WeekContainer extends React.Component {
       
     
       render() {
-          const {degreeType} = this.state.degreeType
         return (
           <div className="container">
             <h1 className="display-1 jumbotron">5-Day Forecast</h1>
             <h5 className="display-5 text-muted">New York, US</h5>
-            <DegreeToggle degreeType={this.state.degreeType} updateForcastDegree={this.updateForecastDegree} />
+            <DegreeToggle degreeType={this.state.degreeType} updateDegree={this.updateDegree} />
             <div className="row justify-content-center"></div>
               {this.formatDayCard()}
             <div/>

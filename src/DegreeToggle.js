@@ -2,7 +2,7 @@ import React from 'react'
 import './WeekContainer'
 
 
-const DegreeToggle = ({degreeType, updateForcastDegree}) => {
+const DegreeToggle = ({degreeType, updateDegree}) => {
     return(
         <React.Fragment>
             <div className="form-check form-check-inline">
@@ -13,7 +13,7 @@ const DegreeToggle = ({degreeType, updateForcastDegree}) => {
             id="celsius"
             value="celsius"
             checked={degreeType === "celsius"}
-            onChange={updateForcastDegree}
+            onChange={updateDegree}
             />
             <label className="form-check-label" htmlFor="celsius">Celsius</label>
         </div>
@@ -25,7 +25,7 @@ const DegreeToggle = ({degreeType, updateForcastDegree}) => {
             id="farenheit"
             value="farenheit"
             checked={degreeType === "farenheit"}
-            onChange={updateForcastDegree}
+            onChange={updateDegree}
             />
             <label className="form-check-label" htmlFor="farenheit">Farenheit</label>
         </div> 
